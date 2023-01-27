@@ -8,7 +8,6 @@ const initModels = require('./models/init.models');
 const app = express();
 app.use(express.json());
 app.use(cors());
-
 initModels();
 
 //Initializing db
@@ -25,7 +24,6 @@ if (process.env.NODE_ENV === 'production') {
     .catch(error => console.log(error))
 } else {
   db.sync({ force: true })
-    // db.sync()
     .then(() => {
       console.log('database synced');
       // defaultData();
@@ -35,8 +33,10 @@ if (process.env.NODE_ENV === 'production') {
 
 //Routes
 const companiesRouter = require('./routes/companies.routes').router;
+const companyTypesRouter = require('./routes/companyTypes.routes').router;
 
 app.use('/api/v1/companies', companiesRouter);
+app.use('/api/v1/companyTypes', companyTypesRouter);
 app.get('/ruta', (req, res) => res.status(200).json({ message: 'hola' }));
 
 module.exports = {

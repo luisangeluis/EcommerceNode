@@ -31,9 +31,10 @@ const createCompany = async (data) => {
   return response;
 }
 
-const updateCompany = async (id, data) => {
+const updateCompany = async (companyId, data) => {
+  const {id,...restOfData} = data;
   const response = await Companies.update(
-    data,
+    restOfData,
     { where: { id } }
   )
 
