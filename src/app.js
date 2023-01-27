@@ -17,21 +17,21 @@ db.authenticate()
   .then(res => console.log(res))
   .catch(error => console.log(error))
 
-if (process.env.NODE_ENV === 'production') {
-  db.sync()
-    .then(() => {
-      console.log('database synced');
-      defaultData();
-    })
-    .catch(error => console.log(error))
-} else {
-  db.sync({ force: true })
-    .then(() => {
-      console.log('database synced');
-      defaultData();
-    })
-    .catch(error => console.log(error))
-}
+// if (process.env.NODE_ENV === 'production') {
+//   db.sync()
+//     .then(() => {
+//       console.log('database synced');
+//       defaultData();
+//     })
+//     .catch(error => console.log(error))
+// } else {
+//   db.sync({ force: true })
+//     .then(() => {
+//       console.log('database synced');
+//       defaultData();
+//     })
+//     .catch(error => console.log(error))
+// }
 
 //Routes
 const companiesRouter = require('./routes/companies.routes').router;
