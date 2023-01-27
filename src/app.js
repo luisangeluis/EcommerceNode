@@ -6,7 +6,9 @@ const initModels = require('./models/init.models');
 
 //initial settings
 const app = express();
+app.use(express.json());
 app.use(cors());
+
 initModels();
 
 //Initializing db
