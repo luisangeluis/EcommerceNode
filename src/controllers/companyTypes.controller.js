@@ -15,7 +15,7 @@ const readAllCompanyTypes = async () => {
 const readCompanyTypesById = async (id) => {
   const response = await CompanyTypes.findOne({
     where: { id },
-    attributes: ['id', name]
+    attributes: ['id','name' ]
   })
 
   return response;
@@ -33,10 +33,10 @@ const createCompanyType = async (data) => {
 const updateCompanyType = async (companyTypeId, data) => {
   const { id, ...restOfData } = data;
 
-  const response = await CompanyTypes.update({
+  const response = await CompanyTypes.update(
     restOfData,
-    where: { id }
-  })
+    {where: { id:companyTypeId }}
+  )
 
   return response;
 }

@@ -43,17 +43,20 @@ const editById = (req, res) => {
   const companyTypeId = req.params.id;
   const data = req.body;
 
+  console.log(companyTypeId);
+  console.log(data);
+
   if (!Object.keys(data).length)
     return res.status(400).json({ message: 'Missing data' });
 
   CompanyTypes.updateCompanyType(companyTypeId, data)
     .then(response => {
       if (response[0])
-        return res.status(200).json({ message: `Company type with id: ${companyId} edited successfully` })
+        return res.status(200).json({ message: `Company type with id: ${companyTypeId} edited successfully` })
       else
-        return res.status(404).json({ message: `Company type with id: ${companyId} doesn't exist` })
+        return res.status(404).json({ message: `Company type with id: ${companyTypeId} doesn't exist` })
     })
-    .catch(error => res.status(404).json({ message: error.message }))
+    .catch(error => res.status(400).json({ message: error.message }))
 }
 
 const removeCompanyType = (req, res) => {

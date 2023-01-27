@@ -21,7 +21,7 @@ const Company = db.define('company',{
     type:DataTypes.UUID,
     field:'companyTypeId'
   },
-  commments:{
+  comments:{
     type:DataTypes.TEXT
   },
   isActive:{
