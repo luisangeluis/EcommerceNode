@@ -12,7 +12,7 @@ const Company = db.define('company',{
     allowNull:false
   },
   constitutionDate:{
-    type:DataTypes.DATE,
+    type:DataTypes.DATEONLY,
     allowNull:false,
     field:'constitution_date'
   },

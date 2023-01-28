@@ -2,11 +2,18 @@
 const uuid = require('uuid');
 //Models
 const Companies = require('../models/company.model');
+const CompanyTypes = require('../models/companyType.model');
 
 const readAllCompanies = async () => {
   const response = await Companies.findAll({
     where: { isActive: true },
-    attributes: ['id', 'name', 'constitutionDate','typeId', 'constitutionDate','comments','isActive']
+    attributes: ['id', 'name', 'constitutionDate', 'constitutionDate','comments','isActive'],
+    include:[
+      {
+        model:CompanyTypes,
+        attributes:['id','name']
+      }
+    ]
   });
 
   return response;
@@ -16,6 +23,7 @@ const readCompanyById = async (id) => {
   const response = await Companies.findOne({
     where: { id },
     attributes: ['id', 'name', 'constitutionDate','typeId', 'constitutionDate','comments','isActive']
+    
   })
 
   return response;
