@@ -1,9 +1,9 @@
 //Models
 const Companies = require('../models/company.model');
-const CompanyTypes = require('../models/companyType.model');
+const CompanyType = require('../models/companyType.model');
 
 const generateData = async () => {
-  await CompanyTypes.bulkCreate([
+  await CompanyType.bulkCreate([
     { id: '6c4f7883-5b93-414a-a87d-d2b8aa9e968b', name: 'distribuidor' },
     { id: 'a6ad6dbb-1441-4a15-9b20-9717cd081ec5', name: 'mayorista' },
     { id: 'be5093b4-3c1a-4288-bc72-ca4f6411ffd8', name: 'usuario final' }

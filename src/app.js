@@ -10,11 +10,18 @@ const defaultData = require('./utils/defaultData');
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 initModels();
 
 //Initializing db
 db.authenticate()
-  .then(res => console.log(res))
+  .then(res => {
+    console.log(res)
+    console.log('autenticado');
+    // initModels();
+
+    defaultData();
+  })
   .catch(error => console.log(error))
 
 // if (process.env.NODE_ENV === 'production') {

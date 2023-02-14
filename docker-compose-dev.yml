@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  ecommerce:
+    build:
+      context: .
+      dockerfile: DockerFile.dev
+    ports:
+      - 3000:3000
+    links:
+      - ecommercedb
+    volumes:
+      - .:/home/app
+      - "/home/app/node_modules"
+  ecommercedb:
+    image: mysql
+    command: --lower_case_table_names=0
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: ecommercedb
+      MYSQL_DATABASE: ecommercedb
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_ROOT_USER: root
+    volumes:
+      - ecommerce-mysql-data:/var/lib/mysql
+volumes:
+  ecommerce-mysql-data:

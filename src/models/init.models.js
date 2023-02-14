@@ -5,6 +5,7 @@ const initModels=()=>{
   //CompanyType -> Company
   CompanyType.hasMany(Company);
   Company.belongsTo(CompanyType);
+  console.log('init models');
 } 
 
 module.exports=initModels;
