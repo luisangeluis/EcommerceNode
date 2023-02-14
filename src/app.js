@@ -45,7 +45,7 @@ db.sync({ force: true })
 //       defaultData();
 //     })
 //     .catch(error => console.log(error))
-// }
+//  }
 
 //Routes
 const companiesRouter = require('./routes/companies.routes').router;
