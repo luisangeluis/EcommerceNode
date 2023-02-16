@@ -23,29 +23,29 @@ db.authenticate()
   .catch(error => console.log(error))
 
 
-db.sync({ force: true })
-  .then(() => {
-    defaultData();
-  })
-  .catch(error => console.log(error))
+// db.sync({ force: true })
+//   .then(() => {
+//     defaultData();
+//   })
+//   .catch(error => console.log(error))
 
 
-// if (process.env.NODE_ENV === 'production') {
-//   db.sync()
-//     .then(() => {
-//       console.log('database synced');
-//       defaultData();
-//     })
-//     .catch(error => console.log(error))
-// } else {
-//   db.sync({ force: true })
-//     // db.sync()
-//     .then(() => {
-//       console.log('database synced');
-//       defaultData();
-//     })
-//     .catch(error => console.log(error))
-//  }
+if (process.env.NODE_ENV === 'production') {
+  db.sync()
+    .then(() => {
+      console.log('database synced');
+      defaultData();
+    })
+    .catch(error => console.log(error))
+} else {
+  db.sync({ force: true })
+    // db.sync()
+    .then(() => {
+      console.log('database synced');
+      defaultData();
+    })
+    .catch(error => console.log(error))
+ }
 
 //Routes
 const companiesRouter = require('./routes/companies.routes').router;
