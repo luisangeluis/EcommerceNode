@@ -33,7 +33,7 @@ db.authenticate()
 if (process.env.NODE_ENV === 'production') {
   db.sync()
     .then(() => {
-      console.log('database synced');
+      console.log('database in production');
       defaultData();
     })
     .catch(error => console.log(error))
@@ -41,18 +41,18 @@ if (process.env.NODE_ENV === 'production') {
   db.sync({ force: true })
     // db.sync()
     .then(() => {
-      console.log('database synced');
+      console.log('database en development');
       defaultData();
     })
     .catch(error => console.log(error))
  }
 
 //Routes
-const companiesRouter = require('./routes/companies.routes').router;
-const companyTypesRouter = require('./routes/companyTypes.routes').router;
+const productsRouter = require('./routes/products.routes').router;
+const categoriesRouter = require('./routes/categories.routes').router;
 
-app.use('/api/v1/companies', companiesRouter);
-app.use('/api/v1/companyTypes', companyTypesRouter);
+app.use('/api/v1/products', productsRouter);
+app.use('/api/v1/categories', categoriesRouter);
 app.get('/ruta', (req, res) => res.status(200).json({ message: 'hola' }));
 
 module.exports = {

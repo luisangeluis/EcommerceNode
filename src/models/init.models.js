@@ -1,10 +1,10 @@
-const Company = require('./company.model');
-const CompanyType = require('./companyType.model');
+const Product = require('./product.model');
+const Category = require('./category.model');
 
 const initModels=()=>{
-  //CompanyType -> Company
-  CompanyType.hasMany(Company);
-  Company.belongsTo(CompanyType);
+  //category -> product
+  Category.hasMany(Product);
+  Product.belongsTo(Category);
   console.log('init models');
 } 
 

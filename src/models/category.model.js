@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const {db} =require('../db/database');
 
-const CompanyType = db.define('company_types',{
+const Category = db.define('category',{
   id:{
     primaryKey:true,
     type:DataTypes.UUID,
@@ -13,4 +13,4 @@ const CompanyType = db.define('company_types',{
   }
 })
 
-module.exports= CompanyType;
+module.exports= Category;

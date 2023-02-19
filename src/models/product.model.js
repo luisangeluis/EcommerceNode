@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const {db} =require('../db/database');
 
-const Company = db.define('company',{
+const Product = db.define('product',{
   id:{
     primaryKey:true,
     type:DataTypes.UUID,
@@ -11,26 +11,25 @@ const Company = db.define('company',{
     type:DataTypes.STRING,
     allowNull:false
   },
-  constitutionDate:{
-    type:DataTypes.DATEONLY,
-    allowNull:false,
-    field:'constitution_date'
+  description:{
+    type:DataTypes.TEXT,
+    allowNull:false
   },
-  typeId:{
+  categoryId:{
     allowNull:false,
     type:DataTypes.UUID,
-    field:'companyTypeId'
+    field:'categoryId'
   },
-  comments:{
-    type:DataTypes.TEXT
+  price:{
+    type:DataTypes.DECIMAL,
+    allowNull:false
   },
   isActive:{
     type:DataTypes.BOOLEAN,
-    allowNull:false,
-    defaultValue: true,
-    field:'is_active'
+    defaultValue:true,
+    allowNull:false
   }
 
 })
 
-module.exports= Company;
+module.exports= Product;

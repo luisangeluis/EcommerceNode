@@ -1,7 +1,7 @@
-const Companies = require('../controllers/companies.controllers');
+const ProductControllers = require('../controllers/products.controllers');
 
 const getAll = (req, res) => {
-  Companies.readAllCompanies()
+  ProductControllers.readAllProducts()
     .then(response => res.status(200).json({ items: response.length, response }))
     .catch(error => res.status(400).json({ message: error.message }))
 }
@@ -9,7 +9,7 @@ const getAll = (req, res) => {
 const getById = (req, res) => {
   const id = req.params.id;
 
-  Companies.readCompanyById(id)
+  ProductControllers.readProductById(id)
     .then(response => {
       if (response) return res.status(200).json(response)
       else return res.status(404).json(response)
@@ -23,28 +23,29 @@ const post = (req, res) => {
   if (!Object.keys(data).length)
     return res.status(400).json({ message: 'Missing data' });
 
-  if (!data.name || !data.constitutionDate || !data.typeId)
+  if (!data.name || !data.description || !data.categoryId || !data.price) 
     return res.status(400).json({
       message: 'At least these fields must be entered',
       fields: {
-        name: 'Type a string',
-        constitutionDate: 'Type a date',
-        typeId: 'Enter company type id'
+        name: 'Type a name',
+        description: 'Type a description',
+        categoryId: 'Type a category Id',
+        price:'Type a price'
       }
     })
 
-  Companies.createCompany(data)
+  ProductControllers.createProduct(data)
     .then(response => {
       return res.status(201).json({
-        message: `Company created successfully with id: ${response.id}`,
-        company: response
+        message: `Product created successfully with id: ${response.id}`,
+        product: response
       })
     })
     .catch(error => res.status(400).json({ message: error.message }))
 }
 
 const editById = (req, res) => {
-  const companyId = req.params.id;
+  const productId = req.params.id;
   const data = req.body;
 
   const { id, ...restOfData } = data;
@@ -53,25 +54,25 @@ const editById = (req, res) => {
     return res.status(400).json({ message: 'Missing data' });
   }
 
-  Companies.updateCompany(companyId, restOfData)
+  ProductControllers.updateProduct(productId, restOfData)
     .then(response => {
       if (response[0])
-        return res.status(200).json({ message: `Company with id: ${companyId} edited successfully` })
+        return res.status(200).json({ message: `Product with id: ${productId} edited successfully` })
       else
-        return res.status(404).json({ message: `Company with id: ${companyId} doesn't exist` })
+        return res.status(404).json({ message: `Product with id: ${productId} doesn't exist` })
     })
     .catch(error => res.status(400).json({ message: error.message }))
 }
 
-const removeCompany = (req, res) => {
-  const companyId = req.params.id;
+const removeProduct = (req, res) => {
+  const productId = req.params.id;
 
-  Companies.deleteCompany(companyId)
+  ProductControllers.deleteCompany(productId)
     .then(response => {
       if (response)
         return res.status(204).json();
       else
-        return res.status(404).json({ message: `Company with id: ${companyId} doesn't exist` })
+        return res.status(404).json({ message: `Product with id: ${productId} doesn't exist` })
     })
     .catch(error => res.status(400).json({ message: error.message }))
 }
@@ -82,5 +83,5 @@ module.exports = {
   getById,
   post,
   editById,
-  removeCompany
+  removeProduct
 }
