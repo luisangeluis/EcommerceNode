@@ -4,9 +4,9 @@ const Category = require('../models/category.model');
 
 const generateData = async () => {
   await Category.bulkCreate([
-    { id: '6c4f7883-5b93-414a-a87d-d2b8aa9e968b', name: 'tecnology' },
-    { id: 'a6ad6dbb-1441-4a15-9b20-9717cd081ec5', name: 'sports' },
-    { id: 'be5093b4-3c1a-4288-bc72-ca4f6411ffd8', name: 'hogar' }
+    { id: '6c4f7883-5b93-414a-a87d-d2b8aa9e968b', name: 'tecnology',status:'active' },
+    { id: 'a6ad6dbb-1441-4a15-9b20-9717cd081ec5', name: 'sports',status:'active' },
+    { id: 'be5093b4-3c1a-4288-bc72-ca4f6411ffd8', name: 'hogar',status:'active' }
   ], { validate: true })
 
   await Product.bulkCreate([
@@ -37,7 +37,7 @@ const generateData = async () => {
       description: '60 megapixel camera',
       categoryId: '6c4f7883-5b93-414a-a87d-d2b8aa9e968b',
       price: 200, 
-      isActive: false
+      status: 'deleted'
     }
   ], { validate: true })
 }

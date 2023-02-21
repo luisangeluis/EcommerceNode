@@ -24,9 +24,9 @@ const Product = db.define('product',{
     type:DataTypes.DECIMAL,
     allowNull:false
   },
-  isActive:{
-    type:DataTypes.BOOLEAN,
-    defaultValue:true,
+  status:{
+    type:DataTypes.STRING,
+    defaultValue:'active',//active,suspended,deleted
     allowNull:false
   }
 

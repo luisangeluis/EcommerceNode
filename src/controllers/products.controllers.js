@@ -10,8 +10,8 @@ const Categories = require('../models/category.model');
  */
 const readAllProducts = async () => {
   const response = await Products.findAll({
-    where: { isActive: true },
-    attributes: ['id', 'name', 'description', 'categoryId','price', 'isActive'],
+    where: { status: 'active' },
+    attributes: ['id', 'name', 'description', 'categoryId', 'price','status'],
     include: [
       {
         model: Categories,
@@ -30,8 +30,8 @@ const readAllProducts = async () => {
  */
 const readProductById = async (id) => {
   const response = await Products.findOne({
-    where: { id, isActive: true },
-    attributes: ['id', 'name', 'description', 'categoryId', 'price', 'isActive']
+    where: { id, status: 'active' },
+    attributes: ['id', 'name', 'description', 'categoryId', 'price','status']
 
   })
 
@@ -75,9 +75,10 @@ const updateProduct = async (productId, data) => {
  * @returns {Object}return response
  */
 const deleteProduct = async (id) => {
-  const response = await Products.destroy({
-    where: { id }
-  })
+  const response = await Products.update(
+    { status: 'deleted' },
+    { where: { id } }
+  )
 
   return response;
 }

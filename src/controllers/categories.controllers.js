@@ -10,7 +10,8 @@ const Categories = require('../models/category.model');
  */
 const readAllCategories = async () => {
   const response = await Categories.findAll({
-    attributes: ['id', 'name']
+    where: { status: 'active' },
+    attributes: ['id', 'name', 'status']
   });
 
   return response;
@@ -23,8 +24,8 @@ const readAllCategories = async () => {
  */
 const readCategoryById = async (id) => {
   const response = await Categories.findOne({
-    where: { id },
-    attributes: ['id', 'name']
+    where: { id, status: 'active' },
+    attributes: ['id', 'name', 'status']
   })
 
   return response;
@@ -67,9 +68,10 @@ const updateCategory = async (categoryId, data) => {
  * @returns {Object} return response
  */
 const deleteCategory = async (id) => {
-  const response = await Categories.destroy({
-    where: { id }
-  })
+  const response = await Categories.update(
+    { status: 'deleted' },
+    { where: { id } }
+  )
 
   return response;
 }

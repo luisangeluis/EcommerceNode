@@ -67,7 +67,7 @@ const editById = (req, res) => {
 const removeProduct = (req, res) => {
   const productId = req.params.id;
 
-  ProductControllers.deleteCompany(productId)
+  ProductControllers.deleteProduct(productId)
     .then(response => {
       if (response)
         return res.status(204).json();

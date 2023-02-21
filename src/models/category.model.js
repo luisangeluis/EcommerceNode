@@ -10,6 +10,11 @@ const Category = db.define('category',{
   name:{
     type:DataTypes.STRING(100),
     allowNull:false
+  },
+  status:{
+    type:DataTypes.STRING,
+    defaultValue:'active',//active,suspended,deleted
+    allowNull:false
   }
 })
 
