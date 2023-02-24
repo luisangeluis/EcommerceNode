@@ -1,6 +1,7 @@
 //Dependencies
 const express = require('express');
 const cors = require('cors');
+const apiLimiter = require('./utils/limiter')
 const { db } = require('./db/database');
 const initModels = require('./models/init.models');
 //Utils
@@ -10,6 +11,7 @@ const defaultData = require('./utils/defaultData');
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(apiLimiter);
 
 initModels();
 
@@ -45,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
       defaultData();
     })
     .catch(error => console.log(error))
- }
+}
 
 //Routes
 const productsRouter = require('./routes/products.routes').router;
