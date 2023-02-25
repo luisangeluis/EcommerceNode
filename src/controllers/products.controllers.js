@@ -11,7 +11,7 @@ const Categories = require('../models/category.model');
 const readAllProducts = async () => {
   const response = await Products.findAll({
     where: { status: 'active' },
-    attributes: ['id', 'name', 'description', 'categoryId', 'price','status'],
+    attributes: ['id', 'name', 'description', 'categoryId', 'price', 'status'],
     include: [
       {
         model: Categories,
@@ -31,7 +31,7 @@ const readAllProducts = async () => {
 const readProductById = async (id) => {
   const response = await Products.findOne({
     where: { id, status: 'active' },
-    attributes: ['id', 'name', 'description', 'categoryId', 'price','status']
+    attributes: ['id', 'name', 'description', 'categoryId', 'price', 'status']
 
   })
 
