@@ -77,6 +77,9 @@ const removeProduct = (req, res) => {
     .catch(error => res.status(400).json({ message: error.message }))
 }
 
+// const postImage=(req,res)=>{
+  
+// }
 
 module.exports = {
   getAll,

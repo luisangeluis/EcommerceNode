@@ -1,35 +1,35 @@
 const { DataTypes } = require('sequelize');
-const {db} =require('../db/database');
+const { db } = require('../db/database');
 
-const Product = db.define('product',{
-  id:{
-    primaryKey:true,
-    type:DataTypes.UUID,
-    allowNull:false
+const Product = db.define('product', {
+  id: {
+    primaryKey: true,
+    type: DataTypes.UUID,
+    allowNull: false
   },
-  name:{
-    type:DataTypes.STRING,
-    allowNull:false
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
-  description:{
-    type:DataTypes.TEXT,
-    allowNull:false
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false
   },
-  categoryId:{
-    allowNull:false,
-    type:DataTypes.UUID,
-    field:'categoryId'
+  categoryId: {
+    allowNull: false,
+    type: DataTypes.UUID,
+    field: 'categoryId'
   },
-  price:{
-    type:DataTypes.DECIMAL,
-    allowNull:false
+  price: {
+    type: DataTypes.DECIMAL,
+    allowNull: false
   },
-  status:{
-    type:DataTypes.STRING,
-    defaultValue:'active',//active,suspended,deleted
-    allowNull:false
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 'active',//active,suspended,deleted
+    allowNull: false
   }
 
 })
 
-module.exports= Product;
+module.exports = Product;
