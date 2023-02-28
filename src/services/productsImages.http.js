@@ -1,17 +1,30 @@
 const ProductsImages = require('../controllers/productsImages.controllers');
+const Products = require('../controllers/products.controllers');
 
-const postImage = (req, res) => {
+const postImage = async (req, res) => {
   const file = req.file;
   const productId = req.params.id;
-  const data = req.body;
-  
-
-  //TODO comprobar si el archivo existe
   console.log(file);
 
-  ProductsImages.createProductImage(productId,file)
-    .then(response => console.log(response))
-    .catch(error => console.log(error));
+  try {
+    const product = await Products.readProductById(productId);
+
+    if (!product) 
+      res.status(404).json({ message: 'Product doesnt exists' })
+    
+    const productImage = await ProductsImages.createProductImage(product.id,data);
+    return res.status(201).json({ message: 'Product image created' });
+  } catch (error) {
+    return res.status(400).json({ message: `${error.message}` });
+  }
+
+
+
+  //TODO comprobar si el archivo existe
+
+  // ProductsImages.createProductImage(productId,file)
+  //   .then(response => console.log(response))
+  //   .catch(error => console.log(error));
 
 }
 

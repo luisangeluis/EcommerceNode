@@ -1,12 +1,15 @@
-const ProductsControllers = require('./products.controllers');
+// const ProductsControllers = require('./products.controllers');
+const uuid = require('uuid');
+const ProductsImages = require('../models/productImage.model');
 
-const createProductImage = async (id, file) => {
-  try{
-    const product = await ProductsControllers.readProductById(id);
-    
-  }catch(error){
-    return error;
-  }
+const createProductImage = async (productId, data) => {
+  const response = await ProductsImages.create({
+    ...data,
+    productId,
+    id: uuid.v4()
+  })
+
+  return response;
 }
 
 module.exports = {

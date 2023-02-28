@@ -24,14 +24,6 @@ db.authenticate()
   })
   .catch(error => console.log(error))
 
-
-// db.sync({ force: true })
-//   .then(() => {
-//     defaultData();
-//   })
-//   .catch(error => console.log(error))
-
-
 if (process.env.NODE_ENV === 'production') {
   db.sync()
     .then(() => {
