@@ -1,17 +1,20 @@
 //Dependencies
 const express = require('express');
 const cors = require('cors');
-const apiLimiter = require('./utils/limiter')
 const { db } = require('./db/database');
 const initModels = require('./models/init.models');
 //Utils
 const defaultData = require('./utils/defaultData');
+const apiLimiter = require('./utils/limiter')
+const uploader = require('./utils/uploadFIles');
+const {uploadToCloudinary} = require('./utils/cloudinary');
 
 //initial settings
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(apiLimiter);
+// app.use(uploader)
 
 initModels();
 
@@ -45,9 +48,22 @@ if (process.env.NODE_ENV === 'production') {
 const productsRouter = require('./routes/products.routes').router;
 const categoriesRouter = require('./routes/categories.routes').router;
 
+app.get('/ruta', (req, res) => res.status(200).json({ message: 'hola' }));
 app.use('/api/v1/products', productsRouter);
 app.use('/api/v1/categories', categoriesRouter);
-app.get('/ruta', (req, res) => res.status(200).json({ message: 'hola' }));
+
+app.post('/upload-image',uploader,async (req,res)=>{
+  const body = req.body;
+
+  if(req.files?.image){
+    console.log(req.files);
+    const result = await uploadToCloudinary(req.files.image.tempFilePath)
+    console.log(result);
+    
+  }
+
+  res.status(200).json({message:'image'});
+})
 
 module.exports = {
   app
