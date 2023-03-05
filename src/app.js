@@ -6,15 +6,16 @@ const initModels = require('./models/init.models');
 //Utils
 const defaultData = require('./utils/defaultData');
 const apiLimiter = require('./utils/limiter')
+
 const uploader = require('./utils/uploadFIles');
-const {uploadToCloudinary} = require('./utils/cloudinary');
+const { uploadToCloudinary } = require('./utils/cloudinary');
+const fs = require('fs-extra');
 
 //initial settings
 const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(apiLimiter);
-// app.use(uploader)
 
 initModels();
 
@@ -52,17 +53,27 @@ app.get('/ruta', (req, res) => res.status(200).json({ message: 'hola' }));
 app.use('/api/v1/products', productsRouter);
 app.use('/api/v1/categories', categoriesRouter);
 
-app.post('/upload-image',uploader,async (req,res)=>{
+app.post('/upload-image', uploader, async (req, res) => {
   const body = req.body;
 
-  if(req.files?.image){
+  if (req.files?.image) {
     console.log(req.files);
-    const result = await uploadToCloudinary(req.files.image.tempFilePath)
+
+    const result = await uploadToCloudinary(req.files.image.tempFilePath);
+
     console.log(result);
-    
+    console.log(result.public_id);
+    console.log(result.secure_url);
+
+    //TODO Guardar en bd
+
+    await fs.unlink(req.files.image.tempFilePath);
+
+    //TODO Para borrar el registro 
+    //Borrar el registro, validar que exista imagen y si es true borrarla
   }
 
-  res.status(200).json({message:'image'});
+  res.status(200).json({ message: 'image' });
 })
 
 module.exports = {
