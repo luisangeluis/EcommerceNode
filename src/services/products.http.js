@@ -23,14 +23,14 @@ const post = (req, res) => {
   if (!Object.keys(data).length)
     return res.status(400).json({ message: 'Missing data' });
 
-  if (!data.name || !data.description || !data.categoryId || !data.price) 
+  if (!data.name || !data.description || !data.categoryId || !data.price)
     return res.status(400).json({
       message: 'At least these fields must be entered',
       fields: {
         name: 'Type a name',
         description: 'Type a description',
         categoryId: 'Type a category Id',
-        price:'Type a price'
+        price: 'Type a price'
       }
     })
 
@@ -78,7 +78,7 @@ const removeProduct = (req, res) => {
 }
 
 // const postImage=(req,res)=>{
-  
+
 // }
 
 module.exports = {

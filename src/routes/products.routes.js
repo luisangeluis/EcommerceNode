@@ -1,5 +1,10 @@
 //Dependencies
 const router = require('express').Router();
+//Middlewares
+const { productExist } = require('../middlewares/products/productExist');
+// const { productExist } = require('../middlewares/products/productExist');
+//Utils
+const uploader = require('../utils/uploadFIles');
 //Services
 const productServices = require('../services/products.http');
 const productsImages = require('../services/productsImages.http');
@@ -10,7 +15,7 @@ router.route('/')
 
 //Post image
 router.route('/:id/post-image')
-  .post(productsImages.postImage);
+  .post(productExist,uploader, productsImages.postImage);
 
 router.route('/:id')
   .get(productServices.getById)

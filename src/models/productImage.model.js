@@ -24,6 +24,11 @@ const productImage = db.define('product_image', {
     type: DataTypes.UUID,
     allowNull: false,
     field: 'product_id'
+  },
+  cloudId:{
+    type:DataTypes.STRING,
+    allowNull:false,
+    field:'cloud_id'
   }
 })
 

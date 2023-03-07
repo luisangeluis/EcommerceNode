@@ -13,10 +13,11 @@ const uploadToCloudinary = async (filePath) => {
   });
 }
 
-const deleteImage = async (publicId) => {
+const deleteImageFromCloudinary = async (publicId) => {
   return await cloudinary.uploader.destroy(publicId);
 }
 
 module.exports = {
-  uploadToCloudinary
+  uploadToCloudinary,
+  deleteImageFromCloudinary
 }
